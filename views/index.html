@@ -4,7 +4,7 @@
   <head>
     <title>URL Shortener</title>
     <link rel="icon" type="image/png" href="../public/favicon.ico" />
-    <link href="./public/style.css" rel="stylesheet" type="text/css" />
+    <link href="../public/style.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
@@ -14,14 +14,14 @@
         <form action="api/shorturl/new" method="POST">
           <fieldset>
             <legend>URL Shortener</legend>
-            <label for="url_input">URL:</label>
+            <label for="url_input">Your URL:</label>
             <input
               id="url_input"
               type="text"
               name="url"
-              placeholder="https://www.freecodecamp.org/"
+              placeholder="https://www.example.com/"
             />
-            <input type="submit" value="POST URL" />
+            <input type="submit" value="Generate URL" />
           </fieldset>
         </form>
       </section>
