@@ -8,7 +8,7 @@ const redirectRouter = require("./routers/redirect-router");
 app.use(cors());
 app.use(express.json());
 
-//app.use("/public", express.static(`./public`));
+app.use("/public", express.static(`./public`));
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/views/index.html");

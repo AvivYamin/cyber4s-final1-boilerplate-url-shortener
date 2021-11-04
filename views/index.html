@@ -11,7 +11,8 @@
     <h1>URL Shortener Microservice</h1>
     <main>
       <section>
-        <form action="api/shorturl/new" method="POST">
+        <!--<form action="shortmyurl" method="POST">-->
+        <form>
           <fieldset>
             <legend>URL Shortener</legend>
             <label for="url_input">Your URL:</label>
@@ -20,14 +21,16 @@
               type="text"
               name="url"
               placeholder="https://www.example.com/"
-            />
-            <input type="submit" value="Generate URL" />
+            >
+          </input>
+          <button id="submit-btn" type="submit">Generate URL</button>
           </fieldset>
         </form>
       </section>
     </main>
     <footer>
-      <p>By <a href="https://www.freecodecamp.org/">freeCodeCamp</a></p>
+      <p>By Aviv Yamin</p>
     </footer>
+    <script type="text/javascript" src="../public/index.js"></script>
   </body>
 </html>
