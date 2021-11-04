@@ -1,7 +1,3 @@
-//import 'regenerator-runtime/runtime';
-//const axios = require('axios');
-// import axios from 'axios';
-
 const submitBtn = document.getElementById("submit-btn");
 const inputElement = document.getElementById("url_input");
 
