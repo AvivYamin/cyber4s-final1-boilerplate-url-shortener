@@ -1,7 +1,19 @@
+//import 'regenerator-runtime/runtime';
+//const axios = require('axios');
+// import axios from 'axios';
+
 const submitBtn = document.getElementById("submit-btn");
 const inputElement = document.getElementById("url_input");
-submitBtn.addEventListener("click", (e) => {
+
+submitBtn.addEventListener("click", postUrl);
+
+async function postUrl(e){
     e.preventDefault();
-    console.log(inputElement.value);
-});
-console.log("hey0y")
+    const originalUrl = inputElement.value;
+    try {
+        const response = await axios.post(`http://localhost:3000/shortmyurl/`, {url: originalUrl});
+        console.log(response)
+    } catch (error) {
+        console.log(error);
+    }
+}
