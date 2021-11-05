@@ -1,0 +1,39 @@
+const fs = require('fs');
+const path = require('path');
+const shortid = require("shortid");
+
+const pathToDbFile = path.resolve(__dirname, "../database/url-db.json");
+
+function urlDataSaver(originalUrl){
+     const validation = validateUrl(originalUrl); //URL existance validator
+
+     if(validation != null){
+         return(validation) //Returns the existent short URL from the database
+     }else{
+        const DB = JSON.parse(fs.readFileSync(pathToDbFile)); //Parse the database file into array
+        const newUrlObject = urlGenerator(originalUrl); //Generates a new URL object with a short URL
+        DB.push(newUrlObject); //Inserts the new object to the array
+        fs.writeFileSync(pathToDbFile, JSON.stringify(DB)); //Overwrites the DB file with the new data
+        return newUrlObject.newUrl; //Returns the new object 
+    }
+}
+
+function urlGenerator(originalUrl){ 
+    const newDynamicId = shortid.generate(); //Generates a unique dynamic ID 
+    const newUrlObject = {newUrl: `http://localhost:3000/${newDynamicId}`, oldUrl: originalUrl}; //Object with the old URL and the new unique one
+    return newUrlObject;
+}
+
+function validateUrl(originalUrl){
+    const DB = JSON.parse(fs.readFileSync(pathToDbFile)); //Parse the database file into array
+    let usedUrl = null;
+    DB.forEach(urlObject => {
+        if(urlObject.oldUrl === originalUrl){ //Checks if the old url exists in the database
+           usedUrl = urlObject.newUrl; //Inserts the used URL to the variable
+        }
+    });
+    return usedUrl;
+}
+
+
+module.exports = urlDataSaver;

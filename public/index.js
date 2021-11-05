@@ -8,8 +8,8 @@ async function postUrl(e){
     const originalUrl = inputElement.value;
     try {
         const response = await axios.post(`http://localhost:3000/shortmyurl/`, {url: originalUrl});
-        console.log(response)
+        console.log(response.data)
     } catch (error) {
-        console.log(error);
+        alert(error);
     }
 }

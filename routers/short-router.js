@@ -1,14 +1,13 @@
 const express = require("express");
 const Router = express.Router();
-const shortid = require("shortid");
+const urlDataSaver = require("./dataManipulator")
 
 Router.post('/', (req, res) => {
-    console.log(shortid.generate());
     try {
         let originUrl = req.body.url;
         if(isValidUrl(originUrl)){
-            console.log(originUrl);
-            res.send("Great Success");
+            const newUrl = urlDataSaver(originUrl);
+            res.send(newUrl);
          }else{
              res.status(403).send("Invalid URl");
          }
