@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 });
 
 app.use('/shortmyurl', shortRouter);
-app.use('/redirect', redirectRouter);
+app.use('/', redirectRouter);
 
 module.exports = app;
 

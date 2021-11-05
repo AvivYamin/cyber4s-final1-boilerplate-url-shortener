@@ -20,7 +20,8 @@ function urlDataSaver(originalUrl){
 
 function urlGenerator(originalUrl){ 
     const newDynamicId = shortid.generate(); //Generates a unique dynamic ID 
-    const newUrlObject = {newUrl: `http://localhost:3000/${newDynamicId}`, oldUrl: originalUrl}; //Object with the old URL and the new unique one
+    let count = 0;
+    const newUrlObject = {newUrl: `http://localhost:3000/${newDynamicId}`, oldUrl: originalUrl, count: count}; //Object with the old URL and the new unique one
     return newUrlObject;
 }
 
@@ -35,5 +36,22 @@ function validateUrl(originalUrl){
     return usedUrl;
 }
 
+function handleRedirect(newUrl){
+    let originalUrl = null;
+    const DB = JSON.parse(fs.readFileSync(pathToDbFile)); //Parse the database file into array
+    DB.forEach(urlObject => {
+        if(urlObject.newUrl === newUrl){ //Checks if the new url exists in the database
+           originalUrl = urlObject.oldUrl; //Inserts its old URL to the variable
+           urlObject.count++;
+           console.log('hello')
+        }
+    });
+    fs.writeFileSync(pathToDbFile, JSON.stringify(DB));
+    return originalUrl;
+}
 
-module.exports = urlDataSaver;
+
+module.exports = {
+    urlDataSaver,
+    handleRedirect
+}
