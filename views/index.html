@@ -8,7 +8,7 @@
   </head>
 
   <body>
-    <h1>URL Shortener Microservice</h1>
+    <h1 id="main-head">URL Shortener Microservice</h1>
     <main>
       <section>
         <!--<form action="shortmyurl" method="POST">-->
@@ -32,6 +32,21 @@
     <footer>
       <p>By Aviv Yamin</p>
     </footer>
+
+    <!--Pop up login form-->
+    <div id="login-container">
+      <button id="openButton" class="open-button">Login</button>
+      <div class="form-popup" id="myForm">
+          <form class="form-container">
+            <h2>Login</h2>
+            <label for="username"><b>Username</b></label>
+            <input id="username-input" type="text" placeholder="Enter User Name" name="username" required>
+            <button id="login-button" type="submit" class="btn">Login</button>
+            <button id="close-button" type="button" class="btn cancel">Close</button>
+          </form>
+      </div>
+    </div>
+
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="module" src="../public/index.js"></script>
   </body>
