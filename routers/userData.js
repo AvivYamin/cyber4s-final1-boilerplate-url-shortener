@@ -55,9 +55,20 @@ function getStatistics(urlId){
     return(queryObject); //returns the corresponding URL object of that id
 }
 
+function getMyUrls(userName){
+    const dirs = fs.readdirSync(path.resolve(__dirname, "../database")); //Gets all the directories in database
+    dirs.pop(); //Gets the public file out of the array
+    let DB = null;
+    dirs.forEach(dir => { //Scans each user directory
+        if(dir === userName){
+            DB = JSON.parse(fs.readFileSync(path.resolve(__dirname, `../database/${dir}/url-db.json`))); //Parse the database file into array
+        }
+    });
+    return DB;
+}
 
 module.exports = {
     urlDataSaver,
-    handleRedirect,
-    getStatistics
+    getStatistics,
+    getMyUrls
 }

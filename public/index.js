@@ -66,14 +66,38 @@ function createResponseElement(shortUrl){
 
 
 
-
+class UrlStats{
+    constructor(newUrl, oldUrl, count, creationDate){
+        this.newUrl = newUrl;
+        this.oldUrl = oldUrl;
+        this.count = count;
+        this.creationDate = creationDate;
+    }
+}
 
 async function getUserStatistics(){ 
+        const dataDiv = document.createElement("div");
+        const headerEl = document.createElement("header");
+        headerEl.textContent = "Your URLs Stats :"
+        dataDiv.appendChild(headerEl);
         const response = await axios.get(`${baseUrl}/info/${userName}`);
         const data = response.data;
-        console.log(data);
-        const dataDiv = document.createElement("div");
-        dataDiv.textContent = data;
+        data.forEach(urlObject => {
+            let urlStatlist = document.createElement("ul");
+            let newUrlEl = document.createElement("li");
+            newUrlEl.textContent = `New URL - ${urlObject.newUrl}`;
+            let oldUrlEl = document.createElement("li");
+            oldUrlEl.textContent = `Old URL - ${urlObject.oldUrl}`;
+            let countEl = document.createElement("li");
+            countEl.textContent = `View Count - ${urlObject.count}`;
+            let creationDateEl = document.createElement("li");
+            creationDateEl.textContent = `Creation Date - ${urlObject.creationDate}`;
+            urlStatlist.appendChild(newUrlEl);
+            urlStatlist.appendChild(oldUrlEl);
+            urlStatlist.appendChild(countEl);
+            urlStatlist.appendChild(creationDateEl);
+            dataDiv.appendChild(urlStatlist);
+        });
         userStatistics.appendChild(dataDiv);
 };
 
@@ -109,7 +133,6 @@ function userLogin(userName){
     localStorage.setItem("username", userName); //Saves user value to local storage
     openButton.style.display = "none"; //Login button disappears
     createUserLink(userName); //Changes the main head
-    //postUserName(); //Activate the post username request to the server
 }
 
 function createUserLink(userName){
