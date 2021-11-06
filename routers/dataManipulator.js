@@ -21,7 +21,7 @@ function urlDataSaver(originalUrl){
 function urlGenerator(originalUrl){ 
     const newDynamicId = shortid.generate(); //Generates a unique dynamic ID 
     let count = 0;
-    const newUrlObject = {newUrl: `http://localhost:3000/${newDynamicId}`, oldUrl: originalUrl, count: count}; //Object with the old URL and the new unique one
+    const newUrlObject = {newUrl: `http://localhost:3000/${newDynamicId}`, oldUrl: originalUrl, count: count, creationDate: new Date(Date.now())}; //Object with the old URL and the new unique one
     return newUrlObject;
 }
 
@@ -43,15 +43,28 @@ function handleRedirect(newUrl){
         if(urlObject.newUrl === newUrl){ //Checks if the new url exists in the database
            originalUrl = urlObject.oldUrl; //Inserts its old URL to the variable
            urlObject.count++;
-           console.log('hello')
         }
     });
     fs.writeFileSync(pathToDbFile, JSON.stringify(DB));
     return originalUrl;
 }
 
+function getStatistics(urlId){
+    //urlId = urlId.substring(33);
+    const shortUrl = urlId.replace('/statistics', ''); //Extracts the statistics from the URL
+    let queryObject = null; 
+    const DB = JSON.parse(fs.readFileSync(pathToDbFile)); //Parse the database file into array
+    DB.forEach(urlObject => {
+        if(urlObject.newUrl === shortUrl){ //Checks if the URL id exists in the database
+            queryObject = urlObject; 
+        }
+    });
+    return(queryObject); //returns the corresponding URL object of that id
+}
+
 
 module.exports = {
     urlDataSaver,
-    handleRedirect
+    handleRedirect,
+    getStatistics
 }

@@ -4,7 +4,7 @@ const dataManipulator = require("./dataManipulator")
 
 Router.get('/:id', (req, res) => {
     try {
-        let oldUrl = dataManipulator.handleRedirect(`http://localhost:3000/${req.params.id}`);
+        const oldUrl = dataManipulator.handleRedirect(`http://localhost:3000/${req.params.id}`);
         if(oldUrl){
             res.redirect(301, oldUrl);
         }else{

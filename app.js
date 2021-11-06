@@ -4,6 +4,7 @@ const cors = require("cors");
 const app = express();
 const shortRouter = require("./routers/short-router");
 const redirectRouter = require("./routers/redirect-router");
+const statisticsRouter = require("./routers/statistics-router");
 
 app.use(cors());
 app.use(express.json());
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
 
 app.use('/shortmyurl', shortRouter);
 app.use('/', redirectRouter);
+app.use('/statistics/', statisticsRouter);
 
 module.exports = app;
 
