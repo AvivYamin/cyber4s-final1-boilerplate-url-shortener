@@ -60,6 +60,7 @@ function createResponseElement(shortUrl){
 }
 
 async function getUserStatistics(){ 
+    try {
         const dataDiv = document.createElement("div");
         const headerEl = document.createElement("header");
         headerEl.textContent = "Your URLs Stats :"
@@ -84,6 +85,11 @@ async function getUserStatistics(){
             dataDiv.appendChild(urlStatlist);
         });
         userStatistics.appendChild(dataDiv);
+    } catch (error) {
+        console.error(error);
+        userStatistics.textContent = "No Stats Yet...";
+    }
+        
 };
 
 
@@ -126,6 +132,7 @@ function userLogin(userName){
 
 function createUserLink(userName){
     const userLinkElement = document.createElement("button");
+    userLinkElement.id = "account";
     userLinkElement.textContent = userName;
     userLinkElement.addEventListener("click", getUserStatistics);
     mainHead.innerText += " - ";
@@ -146,3 +153,4 @@ function openForm() {
       setUpLogin(); //Sets the login option
       location.reload(); //Refresh the DOM
   }
+
