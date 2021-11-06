@@ -2,7 +2,7 @@ body {
   font-family: Arial, sans-serif;
   font-size: 16px;
   color: #222;
-  background-color: #fff;
+  background-color: rgb(204, 38, 38);
   text-align: center;
   line-height: 1.4em;
 }
@@ -43,4 +43,49 @@ input {
 input[type='text'] {
   width: 220px;
   text-align: center;
+}
+
+
+
+/*<------- Response class -------->*/
+
+.copy-btn {
+  position: relative;
+  display: inline-block;
+}
+
+.copy-btn .response-text {
+  visibility: hidden;
+  width: 300px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -75px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.response-text{
+ width: 197px;
+}
+.copy-btn .response-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.copy-btn:hover .response-text {
+  visibility: visible;
+  opacity: 1;
 }
