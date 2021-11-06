@@ -4,12 +4,14 @@ const openButton = document.getElementById("openButton");
 openButton.addEventListener("click", openForm);
 const closeButton = document.getElementById("close-button");
 closeButton.addEventListener("click", closeForm);
+const userStatistics = document.getElementById("user-statistics")
 
 let userName = localStorage.getItem("username");
 setUpLogin(userName);
 
 
 //<---------------- Main functionallity ------------------->
+const baseUrl = "http://localhost:3000"; //API "GET" URL
 const submitBtn = document.getElementById("submit-btn");
 const inputElement = document.getElementById("url_input");
 const responseDiv = document.getElementById("response");
@@ -20,7 +22,15 @@ async function postUrl(e){
     e.preventDefault();
     const originalUrl = inputElement.value;
     try {
-        const response = await axios.post(`http://localhost:3000/shortmyurl/`, {url: originalUrl});
+        let userName = localStorage.getItem("username");
+        let response;
+        if(userName){
+            console.log("logged in");
+            response = await axios.post(`${baseUrl}/shortmyurl/${userName}`, {url: originalUrl});
+        }else{
+            console.log("not logged");
+            response = await axios.post(`${baseUrl}/shortmyurl/`, {url: originalUrl});
+        }
         createResponseElement(response.data); 
     } catch (error) {
         alert(error);
@@ -58,7 +68,14 @@ function createResponseElement(shortUrl){
 
 
 
-
+async function getUserStatistics(){ 
+        const response = await axios.get(`${baseUrl}/info/${userName}`);
+        const data = response.data;
+        console.log(data);
+        const dataDiv = document.createElement("div");
+        dataDiv.textContent = data;
+        userStatistics.appendChild(dataDiv);
+};
 
 
 //<---------------- Pop Up Login Form ------------------->
@@ -68,8 +85,8 @@ submitLogin.addEventListener("click", handleLogin);
 
 //Login function
 function setUpLogin(userName){
-    if(userName != null){
-        mainHead.textContent += ` - ${userName}`; //Changes the main head to include username indication
+    if(userName){
+        createUserLink(userName); //Changes the main head to include username indication link
         if(userName){
             openButton.style.display = "none"; //Once the username is set - login button disappears
         }
@@ -85,16 +102,23 @@ function handleLogin(e){
     }else{
         const userName = loginInput.value; //Assigns the userName with the new input
         userLogin(userName);
-        console.log(userName);
         closeForm();
     }
 }
 function userLogin(userName){
     localStorage.setItem("username", userName); //Saves user value to local storage
-    loginInput.value = userName; //Assigns the userName to the input value
     openButton.style.display = "none"; //Login button disappears
-    mainHead.textContent += ` - ${userName}`; //Changes the main head
+    createUserLink(userName); //Changes the main head
     //postUserName(); //Activate the post username request to the server
+}
+
+function createUserLink(userName){
+    const userLinkElement = document.createElement("button");
+    userLinkElement.textContent = userName;
+    userLinkElement.addEventListener("click", getUserStatistics);
+    mainHead.innerText += " - ";
+    userLinkElement.textContent = userName;
+    mainHead.append(userLinkElement);
 }
 
 function openForm() {

@@ -5,8 +5,8 @@ const shortid = require("shortid");
 const pathToDbFile = path.resolve(__dirname, "../database/url-db.json");
 
 function urlDataSaver(originalUrl){
+    
      const validation = validateUrl(originalUrl); //URL existance validator
-
      if(validation != null){
          return(validation) //Returns the existent short URL from the database
      }else{
