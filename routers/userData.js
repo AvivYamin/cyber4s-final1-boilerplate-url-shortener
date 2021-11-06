@@ -42,19 +42,6 @@ function validateUrl(userName, originalUrl){
     return usedUrl;
 }
 
-function handleRedirect(newUrl){
-    let originalUrl = null;
-    const DB = JSON.parse(fs.readFileSync(pathToDbFile)); //Parse the database file into array
-    DB.forEach(urlObject => {
-        if(urlObject.newUrl === newUrl){ //Checks if the new url exists in the database
-           originalUrl = urlObject.oldUrl; //Inserts its old URL to the variable
-           urlObject.count++;
-        }
-    });
-    fs.writeFileSync(pathToDbFile, JSON.stringify(DB));
-    return originalUrl;
-}
-
 function getStatistics(urlId){
     //urlId = urlId.substring(33);
     const shortUrl = urlId.replace('/statistics', ''); //Extracts the statistics from the URL

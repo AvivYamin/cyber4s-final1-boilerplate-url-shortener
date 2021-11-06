@@ -38,6 +38,28 @@ function validateUrl(originalUrl){
 
 function handleRedirect(newUrl){
     let originalUrl = null;
+    originalUrl = findMyFile(newUrl);
+    return originalUrl;
+}
+
+function findMyFile(newUrl){
+    let originalUrl = null;
+    const dirs = fs.readdirSync(path.resolve(__dirname, "../database")); //Gets all the directories in database
+    const publicDataBase = dirs.pop(); //Gets the public file
+    originalUrl = scanMyfile(path.resolve(__dirname, `../database/${publicDataBase}`), newUrl) //Scans the public file for that URL
+    if(originalUrl){
+        return originalUrl;
+    }else{
+        dirs.forEach(dir => { //Scans each user directory
+            const file = fs.readdirSync(path.resolve(__dirname, `../database/${dir}`)); //Gets the file inside each directory
+            originalUrl = scanMyfile(path.resolve(__dirname, `../database/${dir}/${file}`), newUrl) //Scans each file
+        });
+    }
+    return originalUrl;
+}
+
+function scanMyfile(pathToDbFile, newUrl){
+    let originalUrl = null;
     const DB = JSON.parse(fs.readFileSync(pathToDbFile)); //Parse the database file into array
     DB.forEach(urlObject => {
         if(urlObject.newUrl === newUrl){ //Checks if the new url exists in the database
@@ -45,7 +67,7 @@ function handleRedirect(newUrl){
            urlObject.count++;
         }
     });
-    fs.writeFileSync(pathToDbFile, JSON.stringify(DB));
+    fs.writeFileSync(pathToDbFile, JSON.stringify(DB)); //Overwrites the file
     return originalUrl;
 }
 

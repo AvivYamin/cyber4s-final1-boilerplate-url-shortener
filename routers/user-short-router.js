@@ -1,6 +1,6 @@
 const express = require("express");
 const Router = express.Router();
-const dataManipulator = require("./userData"); //Differnt manipulator
+const dataManipulator = require("./userData"); //Different manipulator
 
 Router.post('/:userName', (req, res) => {
     const userName = req.params.userName;
