@@ -50,7 +50,7 @@ function createResponseElement(shortUrl){
         responseInput.select(); //Select the text field
         responseInput.setSelectionRange(0, 99999) // For mobile devices
         navigator.clipboard.writeText(responseInput.value); //Copy the text inside the text field
-        alert("Copied the text: " + copyText.value); //Alert the copied text
+        //alert("Copied the text: " + responseInput.value); //Alert the copied text
     })
     responseDiv.appendChild(message);
     responseDiv.appendChild(responseInput);

@@ -1,12 +1,13 @@
 const express = require("express");
 const Router = express.Router();
-const dataManipulator = require("./dataManipulator");
+const dataManipulator = require("./userData"); //Differnt manipulator
 
 Router.post('/:userName', (req, res) => {
+    const userName = req.params.userName;
     try {
-        let originUrl = req.body.url;
+        const originUrl = req.body.url;
         if(isValidUrl(originUrl)){
-            const newUrl = dataManipulator.urlDataSaver(originUrl);
+            const newUrl = dataManipulator.urlDataSaver(userName, originUrl);
             res.send(newUrl);
          }else{
              res.status(403).send("Invalid URl");
