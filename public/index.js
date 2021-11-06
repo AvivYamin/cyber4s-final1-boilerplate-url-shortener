@@ -4,6 +4,8 @@ const openButton = document.getElementById("openButton");
 openButton.addEventListener("click", openForm);
 const closeButton = document.getElementById("close-button");
 closeButton.addEventListener("click", closeForm);
+const logoutBtn = document.getElementById("logout-button");
+logoutBtn.addEventListener("click", logOut)
 const userStatistics = document.getElementById("user-statistics")
 
 let userName = localStorage.getItem("username");
@@ -57,30 +59,13 @@ function createResponseElement(shortUrl){
     responseDiv.appendChild(copyBtn);
 }
 
-
-
-
-
-
-
-
-
-
-class UrlStats{
-    constructor(newUrl, oldUrl, count, creationDate){
-        this.newUrl = newUrl;
-        this.oldUrl = oldUrl;
-        this.count = count;
-        this.creationDate = creationDate;
-    }
-}
-
 async function getUserStatistics(){ 
         const dataDiv = document.createElement("div");
         const headerEl = document.createElement("header");
         headerEl.textContent = "Your URLs Stats :"
         dataDiv.appendChild(headerEl);
         const response = await axios.get(`${baseUrl}/info/${userName}`);
+        console.log(response.data);
         const data = response.data;
         data.forEach(urlObject => {
             let urlStatlist = document.createElement("ul");
@@ -113,9 +98,11 @@ function setUpLogin(userName){
         createUserLink(userName); //Changes the main head to include username indication link
         if(userName){
             openButton.style.display = "none"; //Once the username is set - login button disappears
+            logoutBtn.style.display = "block" //Logout button appears
         }
     }else{
         openButton.style.display = "block"; //In first initialization username is null - so display login option
+        logoutBtn.style.display = "none" //Logout button disappears
     }
 }
 
@@ -132,7 +119,9 @@ function handleLogin(e){
 function userLogin(userName){
     localStorage.setItem("username", userName); //Saves user value to local storage
     openButton.style.display = "none"; //Login button disappears
+    logoutBtn.style.display = "block" //Logout button appears
     createUserLink(userName); //Changes the main head
+    location.reload(); //Refresh the DOM
 }
 
 function createUserLink(userName){
@@ -150,4 +139,10 @@ function openForm() {
   
   function closeForm() {
     document.getElementById("myForm").style.display = "none";
+  }
+
+  function logOut(){
+      localStorage.clear();
+      setUpLogin(); //Sets the login option
+      location.reload(); //Refresh the DOM
   }

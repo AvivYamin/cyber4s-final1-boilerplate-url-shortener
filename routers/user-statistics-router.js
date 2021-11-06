@@ -7,7 +7,6 @@ const dataManipulator = require("./userData"); //Different manipulator
 Router.get('/:userName', (req, res) => {
         try {
            const DB = dataManipulator.getMyUrls(req.params.userName);
-           console.log(DB);
            if(DB){
                 res.send(DB);
             }else{
