@@ -1,5 +1,4 @@
 import './style.css';
-import {logOut} from './modules/test.js';
 //Initial setting to header (username)
 const mainHead = document.getElementById("main-head");
 const openButton = document.getElementById("openButton");
@@ -15,7 +14,7 @@ setUpLogin(userName);
 
 
 //<---------------- Main functionallity ------------------->
-const baseUrl = "http://localhost:3000"; //API "GET" URL
+const baseUrl = "https://short-url-aviv.herokuapp.com"; //API "GET" URL
 const submitBtn = document.getElementById("submit-btn");
 const inputElement = document.getElementById("url_input");
 const responseDiv = document.getElementById("response");
@@ -150,9 +149,9 @@ function openForm() {
     document.getElementById("myForm").style.display = "none";
   }
 
-//    function logOut(){
-//        localStorage.clear();
-//        setUpLogin(); //Sets the login option
-//        location.reload(); //Refresh the DOM
-//    }
+    function logOut(){
+        localStorage.clear();
+        setUpLogin(); //Sets the login option
+        location.reload(); //Refresh the DOM
+    }
 
