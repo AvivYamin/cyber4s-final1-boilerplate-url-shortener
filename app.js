@@ -12,10 +12,10 @@ const userNameRouter = require("./routers/user-statistics-router");
 app.use(cors());
 app.use(express.json());
 
-app.use("/public", express.static(`./public`));
+app.use("", express.static(`./front/dist/`));
 
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/views/index.html");
+app.get("", (req, res) => {
+  res.sendFile(__dirname + "./front/dist/index.html");
 });
 
 app.use('/shortmyurl', shortRouter);

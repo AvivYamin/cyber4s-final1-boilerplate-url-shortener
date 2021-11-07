@@ -1,3 +1,5 @@
+import style from './style.css';
+import {logOut} from './modules/test.js';
 //Initial setting to header (username)
 const mainHead = document.getElementById("main-head");
 const openButton = document.getElementById("openButton");
@@ -148,9 +150,9 @@ function openForm() {
     document.getElementById("myForm").style.display = "none";
   }
 
-  function logOut(){
-      localStorage.clear();
-      setUpLogin(); //Sets the login option
-      location.reload(); //Refresh the DOM
-  }
+//    function logOut(){
+//        localStorage.clear();
+//        setUpLogin(); //Sets the login option
+//        location.reload(); //Refresh the DOM
+//    }
 
