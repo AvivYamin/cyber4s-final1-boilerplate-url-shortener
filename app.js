@@ -15,7 +15,7 @@ app.use(express.json());
 //path.resolve(__dirname, "./front/dist/index.html")
 app.use("/", express.static(path.resolve(`./front/dist`)));
 
-app.get("", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.resolve("./front/dist/index.html"));
 });
 
