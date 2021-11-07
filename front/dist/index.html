@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>URL Shortener</title>
+    <!-- <link rel="icon" type="image/png" href="../public/favicon.ico" />
+    <link href="../public/style.css" rel="stylesheet" type="text/css" /> -->
+  <script defer src="main.459daa226eee7f79826d.js"></script></head>
+
+  <body>
+    <main id="main-container">
+      <h1 id="main-head">URL Shortener Microservice</h1>
+      <div id="user-statistics"></div>
+      <section>
+        <form>
+          <fieldset>
+            <legend>URL Shortener</legend>
+            <label for="url_input">Your URL:</label>
+            <input
+              id="url_input"
+              type="text"
+              name="url"
+              placeholder="https://www.example.com/"
+            >
+          </input>
+          <button id="submit-btn" type="submit">Generate URL</button>
+          </fieldset>
+        </form>
+      </section>
+    </main>
+    <div id="response"></div>
+    <footer>
+      <p>By Aviv Yamin</p>
+    </footer>
+
+    <!--Pop up login form-->
+    <div id="login-container">
+      <button id="openButton" class="open-button">Login</button>
+      <button id="logout-button" type="button">Logout</button>
+      <div class="form-popup" id="myForm">
+          <form class="form-container">
+            <h2>Login</h2>
+            <label for="username"><b>Username</b></label>
+            <input id="username-input" type="text" placeholder="Enter User Name" name="username" required>
+            <button id="login-button" type="submit" class="btn">Login</button>
+            <button id="close-button" type="button" class="btn cancel">Close</button>
+          </form>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- <script type="module" src="../public/index.js"></script> -->
+  </body>
+</html>
