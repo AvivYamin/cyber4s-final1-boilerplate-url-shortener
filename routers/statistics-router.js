@@ -4,7 +4,8 @@ const dataManipulator = require("./dataManipulator")
 
 Router.get('/:id', (req, res) => {
     try {
-         const urlObject = dataManipulator.getStatistics(`http://localhost:3000/statistics/${req.params.id}`);
+        const urlObject = dataManipulator.getStatistics(`https://short-url-aviv.herokuapp.com/statistics/${req.params.id}`);
+        //  const urlObject = dataManipulator.getStatistics(`http://localhost:3000/statistics/${req.params.id}`);
          if(urlObject){
              res.send(urlObject);
          }else{

@@ -13,12 +13,12 @@ app.use(cors());
 app.use(express.json());
 
 
-// app.use("/", express.static(path.resolve(`./front/dist`)));
+ app.use("/", express.static(path.resolve(`./front/dist`)));
 
-//  app.get("/", (req, res) => {
-//   console.log("hey");
-//    res.sendFile(path.resolve("./front/dist/index.html"));
-//  });
+  app.get("/", (req, res) => {
+   console.log("hey");
+    res.sendFile(path.resolve("./front/dist/index.html"));
+  });
 
  app.use('/shortmyurl', shortRouter);
  app.use('/shortmyurl/', userShortRouter);

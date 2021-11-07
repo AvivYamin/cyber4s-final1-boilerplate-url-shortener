@@ -21,7 +21,8 @@ function urlDataSaver(originalUrl){
 function urlGenerator(originalUrl){ 
     const newDynamicId = shortid.generate(); //Generates a unique dynamic ID 
     let count = 0;
-    const newUrlObject = {newUrl: `http://localhost:3000/${newDynamicId}`, oldUrl: originalUrl, count: count, creationDate: new Date(Date.now())}; //Object with the old URL and the new unique one
+    // const newUrlObject = {newUrl: `http://localhost:3000/${newDynamicId}`, oldUrl: originalUrl, count: count, creationDate: new Date(Date.now())}; //Object with the old URL and the new unique one
+    const newUrlObject = {newUrl: `https://short-url-aviv.herokuapp.com/${newDynamicId}`, oldUrl: originalUrl, count: count, creationDate: new Date(Date.now())}; //Object with the old URL and the new unique one
     return newUrlObject;
 }
 
