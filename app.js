@@ -19,7 +19,7 @@ app.get("", (req, res) => {
 
 app.use('/shortmyurl', shortRouter);
 app.use('/shortmyurl/', userShortRouter);
-// app.use('/', redirectRouter);
+app.use('/', redirectRouter);
 app.use('/statistics/', statisticsRouter);
 app.use('/info', userNameRouter);
 
