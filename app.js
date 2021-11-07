@@ -15,15 +15,17 @@ app.use(express.json());
 
 // app.use("/", express.static(path.resolve(`./front/dist`)));
 
-app.get("/", (req, res) => {
-  res.sendFile(path.resolve("./front/dist/index.html"));
-});
+ app.get("/", (req, res) => {
+  console.log("hey");
+   res.sendFile(path.resolve("./front/dist/index.html"));
 
-// app.use('/shortmyurl', shortRouter);
-// app.use('/shortmyurl/', userShortRouter);
-// app.use('/', redirectRouter);
-// app.use('/statistics/', statisticsRouter);
-// app.use('/info', userNameRouter);
+ });
+
+ app.use('/shortmyurl', shortRouter);
+ app.use('/shortmyurl/', userShortRouter);
+ app.use('/', redirectRouter);
+ app.use('/statistics/', statisticsRouter);
+ app.use('/info', userNameRouter);
 
 module.exports = app;
 
