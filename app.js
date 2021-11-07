@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const path = require('path');
 const shortRouter = require("./routers/short-router");
 const userShortRouter = require("./routers/user-short-router");
 const redirectRouter = require("./routers/redirect-router");
@@ -11,10 +12,11 @@ const userNameRouter = require("./routers/user-statistics-router");
 app.use(cors());
 app.use(express.json());
 
-app.use("/", express.static(`./front/dist`));
+//path.resolve(__dirname, "./front/dist/index.html")
+app.use("/", express.static(path.resolve(`./front/dist`)));
 
 app.get("", (req, res) => {
-  res.sendFile(__dirname + "./front/dist/index.html");
+  res.sendFile(path.resolve("./front/dist/index.html"));
 });
 
 app.use('/shortmyurl', shortRouter);
