@@ -12,18 +12,18 @@ const userNameRouter = require("./routers/user-statistics-router");
 app.use(cors());
 app.use(express.json());
 
-//path.resolve(__dirname, "./front/dist/index.html")
-app.use("/", express.static(path.resolve(`./front/dist`)));
+
+// app.use("/", express.static(path.resolve(`./front/dist`)));
 
 app.get("/", (req, res) => {
   res.sendFile(path.resolve("./front/dist/index.html"));
 });
 
-app.use('/shortmyurl', shortRouter);
-app.use('/shortmyurl/', userShortRouter);
-app.use('/', redirectRouter);
-app.use('/statistics/', statisticsRouter);
-app.use('/info', userNameRouter);
+// app.use('/shortmyurl', shortRouter);
+// app.use('/shortmyurl/', userShortRouter);
+// app.use('/', redirectRouter);
+// app.use('/statistics/', statisticsRouter);
+// app.use('/info', userNameRouter);
 
 module.exports = app;
 
