@@ -1,4 +1,4 @@
-import style from './style.css';
+import './style.css';
 import {logOut} from './modules/test.js';
 //Initial setting to header (username)
 const mainHead = document.getElementById("main-head");
