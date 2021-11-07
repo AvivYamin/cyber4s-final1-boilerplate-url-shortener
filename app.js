@@ -12,7 +12,7 @@ const userNameRouter = require("./routers/user-statistics-router");
 app.use(cors());
 app.use(express.json());
 
-app.use("", express.static(`./front/dist/`));
+app.use("", express.static(`./front/dist`));
 
 app.get("", (req, res) => {
   res.sendFile(__dirname + "./front/dist/index.html");
